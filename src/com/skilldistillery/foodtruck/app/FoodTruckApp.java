@@ -8,8 +8,8 @@ public class FoodTruckApp {
 
 	// private scanner
 	public Scanner userInput = new Scanner(System.in);
-	//2D array for the classes to populate	
-	//private String [][] fleetOfFoodTrucksArr = foodTruckBuilder();
+	// array for the classes to populate	
+	private FoodTruck[] fleetOfFoodTrucksArr = new FoodTruck[5];
 	
 	public static void main(String[] args) {
 		// Instantiate an instance of the FoodTruckApp and call the interface method
@@ -19,46 +19,51 @@ public class FoodTruckApp {
 	
 	// method for taking in data from the user to build each truck with
 	private void foodTruckBuilder() {
-		// int to keep track of all the ratings given in the truck entries and to pass to the average calculating method
-		int cumulativeScores = 0;
-		// int for the final value of row (iteration)
-		int counter = 0;
+		
 		System.out.println("Welcome to the Food Truck App where you can enter up to 5 food trucks and rate each one. You can then see a report of which truck rates the highest, see a comprehansive list of the Food Trucks or their average rating.\nYou may enter \"quit\" when prompted for a Food Truck name if you wish to enter less than 5 trucks.\n");
 		// for-loop request user input for truck name, food type and rating (1-5)
-		for (int row = 1; row < 6; row++) {
-			// invoke a new instance of the FoodTruck class	
-			FoodTruck foodTruck = new FoodTruck();
-			
-			// invoke the assign the truckID FoodTruck method and pass it the value of row
-			
+		for (int i = 0; i < fleetOfFoodTrucksArr.length; i++) {
+			// create a new truck object to build at every iteration	
+			FoodTruck cT = new FoodTruck();
 				/*sysout for input, list variable to be assigned, , assign input to correct index*/
-				System.out.println("Please enter the name of Food Truck number " + row + " or enter \"quit\" to advance to the menu.");		 
-				String userInputTruckName = userInput.next();				
-				// invoke FoodTruck class method
-				foodTruck.setName(userInputTruckName);
+			System.out.println("Please enter the name of Food Truck number " + (i + 1) + " or enter \"quit\" to advance to the menu.");		 
+			String userInputTruckName = userInput.nextLine();
+			if (userInputTruckName.equals("quit") || userInputTruckName.equals("Quit") || userInputTruckName.equals("QUIT") || userInputTruckName.equals("Q") || userInputTruckName.equals("q")) {
+				//invoke menu method 
+				menu();
+			} else {
+			// invoke FoodTruck set constructor
+			cT.setName(userInputTruckName);
+			}
+			System.out.println("Please enter the type of food served by " + userInputTruckName + ".");
+			String userInputFoodType = userInput.nextLine();
+			// invoke FoodTruck set constructor
+			cT.setType(userInputFoodType);
 				
-				System.out.println("Please enter the type of food served by " + userInputTruckName);
-				String userInputFoodType = userInput.next();
-				// invoke FoodTruck class method
-				foodTruck.setType(userInputFoodType);
-				
-				System.out.println("On a scale of 1 to 5, 5 being excellent and 1 repreesnting poor, how do you rate your " + userInputTruckName + "?");
-				int userInputRating = userInput.nextInt();
-				cumulativeScores += userInputRating;
-				// increment the counter variable
-				counter++;
-				// invoke FoodTruck class method			
-				foodTruck.setRating(userInputRating);
+			System.out.println("On a scale of 1 to 5, 5 being excellent and 1 representing poor, how do you rate your " + userInputTruckName + " experience?");
+			int userInputRating = userInput.nextInt();
+			// clear the scanner
+			userInput.nextLine();
+			// invoke FoodTruck set constructor		
+			cT.setRating(userInputRating);
+		
+			// add the completed truck into the array
+			fleetOfFoodTrucksArr[i] = cT;
+			System.out.println("Your entry has been added!\n");
 			}
 		// invoke the menu method (now all foodtrucks have been created)
 		
+		menu();
 		}
 
 	
 	// method for the menu
-	
+	public void menu() {
 		// present menu to user in invoke the proper method to fetch the correct data based on users selection (switch)
-	
+		System.out.println(fleetOfFoodTrucksArr[0]);
+		System.out.println(fleetOfFoodTrucksArr[1]);
+	System.exit(0);
+	}
 	// method for sending inputs to the FoodTruck class and inputting them into a 2D array of trucks 
 		//Declare a 2D String array instance with a 5 and 4 grid
 //		String[][] userInputFoodTruckArr = new String[5][4];

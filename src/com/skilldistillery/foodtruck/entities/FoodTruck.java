@@ -7,6 +7,7 @@ public class FoodTruck {
  * 3. type
  * 4. rating
  *  */
+	private static int COUNT = 0;
 	private int idNum;
 	private String name;
 	private String type;
@@ -14,15 +15,15 @@ public class FoodTruck {
 	// empty constructor for the FoodTruck class (this class)
 	public FoodTruck() {};
 	// overload the constructor above but with parameters entered for the fields listed
-	public FoodTruck(int ftIdNum, String ftName, String ftType, int score) {
+	public FoodTruck(String ftName, String ftType, int score) {
 		//this.fieldName = corresponding parameter name for each field
-		this.idNum = ftIdNum;
 		this.name = ftName;
 		this.type = ftType;
 		this.rating = score;
+		//everything you need to have happen for each truck that's made
+		COUNT++;
+		idNum = COUNT;
 	}
-	// constructor that assigns the ID number value from the current value of a static field (such as (nextTruckId) and then increments the static field.
-	
 	// method for invoking the menu method if the truckname is "quit"
 	
 	// rating method
