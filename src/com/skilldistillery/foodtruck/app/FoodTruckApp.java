@@ -24,7 +24,7 @@ public class FoodTruckApp {
 		System.out.println("Welcome to the Food Truck App where you can enter up to 5 food trucks and rate each one. You can then see a report of which truck rates the highest, see a comprehansive list of the Food Trucks or their average rating.\nYou may enter \"quit\" when prompted for a Food Truck name if you wish to enter less than 5 trucks.\n");
 		// for-loop request user input for truck name, food type and rating (1-5)
 		for (int i = 0; i < fleetOfFoodTrucksArr.length; i++) {
-			// create a new truck object to build at every iteration	
+			// create a new truck (cT = currentTruck) object to build at every iteration	
 			FoodTruck cT = new FoodTruck();
 				
 			
@@ -63,32 +63,73 @@ public class FoodTruckApp {
 	// method for the menu
 	public void menu() {
 		// present menu to user in invoke the proper method to fetch the correct data based on users selection (switch)
-		System.out.println(fleetOfFoodTrucksArr[0]);
-		System.out.println(fleetOfFoodTrucksArr[1]);
-	System.exit(0);
+		System.out.println("****************************");
+		System.out.println("*      ENTER A NUMBER      *");
+		System.out.println("*  1. List of all Entries  *");
+		System.out.println("*  2. Average Rating       *");
+		System.out.println("*  3. View Highest Rated   *");
+		System.out.println("*  4. Quit                 *");
+		System.out.println("****************************");
+		int userMenuSelection = userInput.nextInt();
+		userInput.nextLine();
+		
+		switch(userMenuSelection) {
+		case 1: 
+			listOfAllFoodTrucks(fleetOfFoodTrucksArr);
+			break;
+		case 2:
+			averageRating(fleetOfFoodTrucksArr);
+			break;
+		case 3:
+			highestRatedTruck(fleetOfFoodTrucksArr);
+			break;
+		case 4:
+			
+			break;
+			default:
+				System.out.println("Unrecognized Selection. Please Try again.\n");
+				menu();
+		}
 	}
-	// method for sending inputs to the FoodTruck class and inputting them into a 2D array of trucks 
-		//Declare a 2D String array instance with a 5 and 4 grid
-//		String[][] userInputFoodTruckArr = new String[5][4];
-//		userInputFoodTruckArr[row][1] = userInputTruckName;
-//		userInputFoodTruckArr[row][2] = userInputFoodType;
-//		userInputFoodTruckArr[row][3] = userInputRating;
+	
+	
 
-	// method to compute the average rating of the trucks and return a String (use toString)
-	//private int averageRating(int score) {
-		// invoke the menu method
 	
+// method to generate a list of all trucks in the array (use toString)
+	public void listOfAllFoodTrucks(FoodTruck[] allTrucks) {
+		// sysout a string (to String from the FoodTruck class)
+		
+		// return to the menu method
+		menu();
 	}
-	// method to  list the highest rated truck(s)
 	
+	// method to compute the average rating of the trucks and return a String (use toString)
+	public void averageRating(FoodTruck[] allTrucksRatings) {
+	
+		
+		// invoke the menu method
+		menu();
+
+	}
+	
+	// method to  list the highest rated truck(s)
+	public void highestRatedTruck(FoodTruck[] bestTruck) {
 		// The truck(s) is displayed with all its properties (use toString)
 	
 		// invoke the menu method
+		menu();
 	
-	// method to generate a list of all trucks in the array (use toString)
+	}
 	
-		// invoke the menu method
-	
-	// method to send closing message, close the scanner & quit the program 
-	
+//	String userInputRatingString = String.valueOf(userInputRating).toString();
 
+	// method to send closing message, close the scanner & quit the program 
+	public void systemExit() {
+		System.out.println("May your artery's stay clean and your stomach full! Thanks for using our Food Truck rating app!");
+		userInput.close();
+		System.exit(0);
+	}
+		
+
+	
+}

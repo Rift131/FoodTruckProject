@@ -16,7 +16,7 @@ public class FoodTruck {
 	public FoodTruck() {
 		FoodTruck.COUNT++;
 		this.idNum = COUNT;
-	};
+	}
 	
 	// overload the constructor above but with parameters entered for the fields listed
 	public FoodTruck(String ftName, String ftType, int score) {
@@ -24,8 +24,7 @@ public class FoodTruck {
 		//this.fieldName = corresponding parameter name for each field
 		this.name = ftName;
 		this.type = ftType;
-		this.rating = score;
-		
+		this.rating = score;		
 	}
 	// method for invoking the menu method if the truckname is "quit"
 	
