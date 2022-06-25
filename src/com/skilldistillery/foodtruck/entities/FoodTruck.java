@@ -10,19 +10,22 @@ public class FoodTruck {
 	private static int COUNT = 0;
 	private int idNum;
 	private String name;
-	private String type;
-	private int rating;
-	// empty constructor for the FoodTruck class (this class)
-	public FoodTruck() {};
+	private String type ;
+	private int rating;	
+	// initial constructor for the FoodTruck class and any attributes that won't be included when the user creates each truck
+	public FoodTruck() {
+		FoodTruck.COUNT++;
+		this.idNum = COUNT;
+	};
+	
 	// overload the constructor above but with parameters entered for the fields listed
 	public FoodTruck(String ftName, String ftType, int score) {
+		//everything you need to have happen for each truck that's made
 		//this.fieldName = corresponding parameter name for each field
 		this.name = ftName;
 		this.type = ftType;
 		this.rating = score;
-		//everything you need to have happen for each truck that's made
-		COUNT++;
-		idNum = COUNT;
+		
 	}
 	// method for invoking the menu method if the truckname is "quit"
 	
@@ -30,13 +33,13 @@ public class FoodTruck {
 		//String userInputRatingString = String.valueOf(userInputRating).toString();
 	// GETTERS AND SETTERS
 
-	public int getIdNum() {
-		return idNum;
-	}
-
-	public void setIdNum(int idNum) {
-		this.idNum = idNum;
-	}
+//	public int getIdNum() {
+//		return idNum;
+//	}
+//
+//	public void setIdNum(int idNum) {
+//		this.idNum = idNum;
+//	}
 
 	public String getName() {
 		return name;

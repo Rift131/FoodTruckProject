@@ -11,6 +11,7 @@ public class FoodTruckApp {
 	// array for the classes to populate	
 	private FoodTruck[] fleetOfFoodTrucksArr = new FoodTruck[5];
 	
+	
 	public static void main(String[] args) {
 		// Instantiate an instance of the FoodTruckApp and call the interface method
 		FoodTruckApp app = new FoodTruckApp();
@@ -25,7 +26,9 @@ public class FoodTruckApp {
 		for (int i = 0; i < fleetOfFoodTrucksArr.length; i++) {
 			// create a new truck object to build at every iteration	
 			FoodTruck cT = new FoodTruck();
-				/*sysout for input, list variable to be assigned, , assign input to correct index*/
+				
+			
+			/*sysout for input, list variable to be assigned, , assign input to correct index*/
 			System.out.println("Please enter the name of Food Truck number " + (i + 1) + " or enter \"quit\" to advance to the menu.");		 
 			String userInputTruckName = userInput.nextLine();
 			if (userInputTruckName.equals("quit") || userInputTruckName.equals("Quit") || userInputTruckName.equals("QUIT") || userInputTruckName.equals("Q") || userInputTruckName.equals("q")) {
