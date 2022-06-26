@@ -7,11 +7,12 @@ public class FoodTruck {
  * 3. type
  * 4. rating
  *  */
-	private static int COUNT = 0;
+	public static int COUNT = 0;
 	private int idNum;
 	private String name;
 	private String type ;
 	private int rating;	
+	/***********************CONSTRUCTORS*************************/
 	// initial constructor for the FoodTruck class and any attributes that won't be included when the user creates each truck
 	public FoodTruck() {
 		FoodTruck.COUNT++;
@@ -26,11 +27,9 @@ public class FoodTruck {
 		this.type = ftType;
 		this.rating = score;		
 	}
-	// method for invoking the menu method if the truckname is "quit"
-	
-	// rating method
-		//String userInputRatingString = String.valueOf(userInputRating).toString();
-	// GETTERS AND SETTERS
+
+	/***********************GETTERS AND SETTERS*************************/
+
 
 //	public int getIdNum() {
 //		return idNum;
@@ -66,7 +65,7 @@ public class FoodTruck {
 // to string method
 	@Override
 	public String toString() {
-		return "FoodTruck [idNum=" + idNum + ", name=" + name + ", type=" + type + ", rating=" + rating + "]";
+		return "Truck ID Number: " + idNum + "| FoodTruck name: " + name + "| Type: " + type + "| Rating: " + rating;
 	}
 	
 	
