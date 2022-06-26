@@ -24,8 +24,6 @@ public class FoodTruckApp {
 				"Welcome to the Food Truck App where you can enter up to 5 food trucks and rate each one. You can then see a report of which truck rates the highest, see a comprehansive list of the Food Trucks or their average rating.\nYou may enter \"quit\" when prompted for a Food Truck name if you wish to enter less than 5 trucks.\n");
 		// for-loop request user input for truck name, food type and rating (1-5)
 		for (int i = 0; i < fleetOfFoodTrucksArr.length; i++) {
-			// create a new truck (cT = currentTruck) object to build at every iteration
-			FoodTruck cT = new FoodTruck();
 
 			/*
 			 * sysout for input, list variable to be assigned, , assign input to correct
@@ -39,10 +37,12 @@ public class FoodTruckApp {
 					|| userInputTruckName.equals("q")) {
 				// invoke menu method
 				menu();
-			} else {
-				// invoke FoodTruck set constructor
-				cT.setName(userInputTruckName);
 			}
+			// create a new truck (cT = currentTruck) object to build at every iteration
+			FoodTruck cT = new FoodTruck();
+			// invoke FoodTruck set constructor
+			cT.setName(userInputTruckName);
+
 			System.out.println("Please enter the type of food served by " + userInputTruckName + ".");
 			String userInputFoodType = userInput.nextLine();
 			// invoke FoodTruck set constructor
@@ -60,8 +60,7 @@ public class FoodTruckApp {
 			// add the completed truck into the array
 			fleetOfFoodTrucksArr[i] = cT;
 			System.out.println("Your entry has been added!\n");
-			
-			
+
 		}
 		// invoke the menu method (now all foodtrucks have been created)
 
@@ -81,20 +80,19 @@ public class FoodTruckApp {
 		System.out.println("*  4. Quit                 *");
 		System.out.println("****************************");
 		System.out.println("\n");
-		int userMenuSelection = userInput.nextInt();
-		userInput.nextLine();
+		String userMenuSelection = userInput.nextLine();
 
 		switch (userMenuSelection) {
-		case 1:
+		case "1":
 			listOfAllFoodTrucks(fleetOfFoodTrucksArr);
 			break;
-		case 2:
+		case "2":
 			averageRating(fleetOfFoodTrucksArr);
 			break;
-		case 3:
+		case "3":
 			highestRatedTruck(fleetOfFoodTrucksArr);
 			break;
-		case 4:
+		case "4":
 			systemExit();
 			break;
 		default:
@@ -105,9 +103,10 @@ public class FoodTruckApp {
 
 // method to generate a list of all trucks in the array (use toString)
 	public void listOfAllFoodTrucks(FoodTruck[] allTrucks) {
+		System.out.println("COUNT value before iteration begins: " + FoodTruck.COUNT);
 		// sysout a string (to String from the FoodTruck class)
-		for (FoodTruck cT : allTrucks) {
-			System.out.println(cT.toString());
+		for (int i = 0; i < FoodTruck.COUNT; i++) {
+			System.out.println(allTrucks[i].toString());
 		}
 		// return to the menu method
 		menu();
@@ -117,8 +116,8 @@ public class FoodTruckApp {
 	// toString)
 	public void averageRating(FoodTruck[] allTrucksRatings) {
 		int totalRatings = 0;
-		for(FoodTruck cT : allTrucksRatings) {
-			totalRatings += cT.getRating();
+		for (int i = 0; i < FoodTruck.COUNT; i++) {
+			totalRatings += allTrucksRatings[i].getRating();
 		}
 		int avgRating = (totalRatings / FoodTruck.COUNT);
 		System.out.println("The average review rating of all entrie(s): " + avgRating);
@@ -131,16 +130,17 @@ public class FoodTruckApp {
 	public void highestRatedTruck(FoodTruck[] bestTruck) {
 		// The truck(s) is displayed with all its properties (use toString)
 		int highestRatingFound = 0;
-		for(FoodTruck cT : bestTruck) {
-			int currentTruckRating = cT.getRating();
+		int currentTruckRating = 0;
+		for (int i = 0; i < FoodTruck.COUNT; i++) {
+			currentTruckRating = bestTruck[i].getRating();
 			if (currentTruckRating > highestRatingFound) {
 				highestRatingFound = currentTruckRating;
 			}
 		}
 		System.out.println("The Food Truck(s) with the highest rating are...");
-		for(FoodTruck cT : bestTruck) {
-			if (cT.getRating() == highestRatingFound) {
-				System.out.println(cT.toString());
+		for (int i = 0; i < FoodTruck.COUNT; i++) {
+			if (bestTruck[i].getRating() == highestRatingFound) {
+				System.out.println(bestTruck[i].toString());
 			}
 		}
 		// invoke the menu method
