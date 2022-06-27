@@ -32,11 +32,15 @@ public class FoodTruckApp {
 			System.out.println("Please enter the name of Food Truck number " + (i + 1)
 					+ " or enter \"quit\" to advance to the menu.");
 			String userInputTruckName = userInput.nextLine();
-			if (userInputTruckName.equals("quit") || userInputTruckName.equals("Quit")
-					|| userInputTruckName.equals("QUIT") || userInputTruckName.equals("Q")
-					|| userInputTruckName.equals("q")) {
+			
+			if (userInputTruckName.equals("quit") || userInputTruckName.equals("Quit") || userInputTruckName.equals("QUIT") || userInputTruckName.equals("Q") || userInputTruckName.equals("q") && i == 0) {
+				// exit the program when the user chooses to quit and no entries have been made
+				systemExit();
+			} else if (userInputTruckName.equals("quit") || userInputTruckName.equals("Quit") || userInputTruckName.equals("QUIT") || userInputTruckName.equals("Q") || userInputTruckName.equals("q")) {
 				// invoke menu method
 				menu();
+			} else if (userInputTruckName.equals("")) {
+				userInputTruckName = "Not Entered";
 			}
 			// create a new truck (cT = currentTruck) object to build at every iteration
 			FoodTruck cT = new FoodTruck();
@@ -45,25 +49,43 @@ public class FoodTruckApp {
 
 			System.out.println("Please enter the type of food served by " + userInputTruckName + ".");
 			String userInputFoodType = userInput.nextLine();
+			// if user doesn't enter a name set a default
+			if (userInputFoodType.equals("")) {
+				userInputFoodType = "Not Entered";
+			}
 			// invoke FoodTruck set constructor
 			cT.setType(userInputFoodType);
 
-			System.out.println("On a scale of 1 to 5, 5 being excellent and 1 representing poor, how do you rate your "
-					+ userInputTruckName + " experience?");
-			int userInputRating = userInput.nextInt();
+			// Get users rating for the Food Truck, rating 1-5
+			System.out.println(
+					"On a scale of 1 to 5, 5 being excellent and 1 representing poor, how do you rate your culinary experience?");
+			String userInputRating = userInput.nextLine();
 			// clear the scanner
-			userInput.nextLine();
-			// invoke FoodTruck set constructor
-			cT.setRating(userInputRating);
-			// without a prompt to the user add the .toString to the last index
-			cT.toString();
-			// add the completed truck into the array
-			fleetOfFoodTrucksArr[i] = cT;
-			System.out.println("Your entry has been added!\n");
-
+			// userInput.nextLine();
+			// without a prompt to the user add the .toString to the last index and verify
+			// the entry for the rating was valid (if not, erase the current index, prompt
+			// the user, decrement i and re-invoke (recursion but removing the current layer
+			// on the stack)
+			switch (userInputRating) {
+			case "1":
+			case "2":
+			case "3":
+			case "4":
+			case "5":
+				Integer rating = Integer.valueOf(userInputRating);
+				cT.setRating(rating);
+				cT.toString();
+				fleetOfFoodTrucksArr[i] = cT;
+				System.out.println("Your Food Truck entry has been added to the list!\n");
+				break;
+			default:
+				System.out.println(
+						"Your entry did not match the numerical rating requirement. Please attempt your Food Truck entry again.\n");
+				i--;
+				FoodTruck.COUNT--;
+			}
 		}
 		// invoke the menu method (now all foodtrucks have been created)
-
 		menu();
 	}
 
@@ -71,14 +93,13 @@ public class FoodTruckApp {
 	public void menu() {
 		// present menu to user in invoke the proper method to fetch the correct data
 		// based on users selection (switch)
-		System.out.println("\n");
-		System.out.println("****************************");
-		System.out.println("*      ENTER A NUMBER      *");
-		System.out.println("*  1. List of all Entries  *");
-		System.out.println("*  2. Average Rating       *");
-		System.out.println("*  3. View Highest Rated   *");
-		System.out.println("*  4. Quit                 *");
-		System.out.println("****************************");
+		System.out.println("************************************");
+		System.out.println("*          ENTER A NUMBER          *");
+		System.out.println("*  1. List all food truck entries  *");
+		System.out.println("*  2. Display average rating       *");
+		System.out.println("*  3. Display Highest Rated        *");
+		System.out.println("*  4. Quit the Program             *");
+		System.out.println("************************************");
 		System.out.println("\n");
 		String userMenuSelection = userInput.nextLine();
 
@@ -103,7 +124,6 @@ public class FoodTruckApp {
 
 // method to generate a list of all trucks in the array (use toString)
 	public void listOfAllFoodTrucks(FoodTruck[] allTrucks) {
-		System.out.println("COUNT value before iteration begins: " + FoodTruck.COUNT);
 		// sysout a string (to String from the FoodTruck class)
 		for (int i = 0; i < FoodTruck.COUNT; i++) {
 			System.out.println(allTrucks[i].toString());
@@ -120,7 +140,7 @@ public class FoodTruckApp {
 			totalRatings += allTrucksRatings[i].getRating();
 		}
 		int avgRating = (totalRatings / FoodTruck.COUNT);
-		System.out.println("The average review rating of all entrie(s): " + avgRating);
+		System.out.println("The average review rating of all entries: " + avgRating);
 		// invoke the menu method
 		menu();
 

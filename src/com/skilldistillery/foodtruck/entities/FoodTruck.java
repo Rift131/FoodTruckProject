@@ -65,7 +65,7 @@ public class FoodTruck {
 // to string method
 	@Override
 	public String toString() {
-		return "Truck ID Number: " + idNum + "| FoodTruck name: " + name + "| Type: " + type + "| Rating: " + rating;
+		return "Truck ID Number: " + idNum + " | FoodTruck name: " + name + " | Type: " + type + " | Rating: " + rating;
 	}
 	
 	
